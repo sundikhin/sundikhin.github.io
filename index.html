@@ -3,55 +3,780 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sundi Myint</title>
   <meta name="color-scheme" content="light dark">
+  <title>Sundi Myint</title>
+  <meta name="description" content="Sundi Myint, Engineering Manager">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* ---------- Theme: lavender and rose ---------- */
     :root {
-      --bg: #f4efe6;
-      --bg-accent: #e8dfd0;
-      --text: #2b2a28;
-      --muted: #6b6459;
-      --accent: #3f7d6e;
+      --bg: #f7f5fb;
+      --hero: #ece6f8;
+      --surface: #ffffff;
+      --surface-alt: #efebf8;
+      --text: #2f2a3a;
+      --muted: #6c6580;
+      --border: #e3ddf0;
+
+      --lavender: #a896d8;
+      --lavender-soft: #ddd4f3;
+      --lavender-ink: #3d2f66;
+      --rose: #e39ab5;
+      --rose-soft: #f6d3e0;
+      --rose-ink: #6b2443;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1c1f24;
-        --bg-accent: #252a31;
-        --text: #e6e1d8;
-        --muted: #a39d92;
-        --accent: #7cc4b1;
+        --bg: #1e1b26;
+        --hero: #262135;
+        --surface: #282433;
+        --surface-alt: #231f2e;
+        --text: #ece8f5;
+        --muted: #a9a2bb;
+        --border: #363045;
+
+        --lavender: #b9a9e8;
+        --lavender-soft: #423866;
+        --lavender-ink: #e2dbf7;
+        --rose: #f2a7c3;
+        --rose-soft: #562d45;
+        --rose-ink: #fadbe7;
       }
     }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
     body {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: radial-gradient(circle at 30% 20%, var(--bg-accent), var(--bg) 70%);
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      text-align: center;
-      padding: 0 16px;
+      font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
     }
-    h1 { font-size: 2.5rem; margin: 0 0 0.75rem; }
-    h1::after {
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .mono { font-family: "Space Mono", ui-monospace, monospace; }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; }
+    h2 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin: 0 0 2rem;
+      line-height: 1;
+    }
+    h2::after {
       content: "";
       display: block;
-      width: 48px;
-      height: 3px;
-      margin: 0.75rem auto 0;
-      border-radius: 2px;
-      background: var(--accent);
+      width: 60px;
+      height: 6px;
+      margin-top: 1rem;
+      background: var(--rose);
     }
-    p { font-size: 1.1rem; color: var(--muted); margin: 0; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; gap: 6rem; }
+    }
+    .icon { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ---------- Jump menu ---------- */
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    section { scroll-margin-top: 4rem; }
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-nav .wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      height: 3.5rem;
+    }
+    .nav-home { font-weight: 800; text-decoration: none; font-size: 1.1rem; flex-shrink: 0; }
+    /* Section links scroll sideways inside the bar on small screens, never the page */
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      margin-left: auto;
+      overflow-x: auto;
+      scrollbar-width: none;
+      font-size: 0.95rem;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { text-decoration: none; white-space: nowrap; color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a[aria-current="true"] {
+      color: var(--text);
+      text-decoration: underline 2px var(--rose);
+      text-underline-offset: 6px;
+    }
+    .nav-contact[aria-current="true"] { background: var(--rose); }
+    .nav-contact {
+      flex-shrink: 0;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      background: var(--lavender);
+      color: #1e1b26;
+      transition: background 0.2s;
+    }
+    .nav-contact:hover { background: var(--rose); }
+    .site-nav a:focus-visible { outline: 3px solid var(--lavender); outline-offset: 2px; border-radius: 4px; }
+    @media (max-width: 520px) {
+      .nav-home { display: none; }
+      /* Fade the right edge so it's clear more links scroll into view */
+      .nav-links {
+        margin-left: 0;
+        padding-right: 1.5rem;
+        -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent);
+        mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent);
+      }
+    }
+
+    /* ---------- Header ---------- */
+    header { background: var(--hero); padding-top: 4rem; }
+    @media (min-width: 768px) { header { padding-top: 7rem; } }
+    .hero-text { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 2rem; }
+    .name {
+      margin: 0;
+      font-size: clamp(4.5rem, 13vw, 9.5rem);
+      font-weight: 700;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+    }
+    .name span { display: block; }
+    .title {
+      margin: 1.25rem 0 0;
+      font-size: clamp(1rem, 2.2vw, 1.6rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--lavender-ink);
+    }
+    @media (prefers-color-scheme: dark) { .title { color: var(--lavender); } }
+    .photo { align-self: end; justify-self: end; width: 100%; max-width: 400px; }
+    @media (min-width: 768px) { .photo { max-width: none; } }
+    .photo img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    /* ---------- About & skills ---------- */
+    .contact { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; gap: 0.75rem; font-size: 1rem; }
+    .contact li { display: flex; align-items: center; gap: 0.6rem; }
+    .contact a { text-decoration: none; border-bottom: 2px solid var(--lavender-soft); }
+    .contact a:hover { border-color: var(--lavender); }
+    .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .skill {
+      padding: 1rem 1.25rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 4px;
+    }
+    .skill { display: flex; align-items: center; justify-content: center; }
+    .nowrap { white-space: nowrap; }
+    .skill.lav { background: var(--lavender-soft); color: var(--lavender-ink); }
+    .skill.rose { background: var(--rose-soft); color: var(--rose-ink); }
+
+    /* ---------- Experience timeline ---------- */
+    #experience { background: var(--surface-alt); }
+    .timeline { position: relative; list-style: none; margin: 0; padding: 0; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: 9px;
+      width: 3px;
+      background: var(--lavender-soft);
+    }
+    .job { position: relative; padding-left: 3rem; margin-bottom: 1.5rem; }
+    .job::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 1.75rem;
+      width: 21px; height: 21px;
+      border-radius: 50%;
+      background: var(--rose);
+      border: 4px solid var(--surface-alt);
+    }
+    .job-toggle {
+      all: unset;
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .job-toggle:hover { border-color: var(--lavender); }
+    .job-toggle:focus-visible { outline: 3px solid var(--lavender); outline-offset: 2px; }
+    .job-role {
+      display: block;
+      font-size: clamp(1.35rem, 3vw, 1.8rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+    .job-company { display: block; margin-top: 0.25rem; font-size: 1rem; }
+    .job-dates { display: block; margin-top: 0.4rem; font-size: 0.875rem; color: var(--muted); }
+    .chevron { width: 24px; height: 24px; color: var(--lavender); transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .job-toggle[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+    .job-toggle[aria-expanded="true"] { border-color: var(--lavender); }
+    /* Animates to the content's real height, so long descriptions are never cut off */
+    .job-detail {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows 0.4s ease, opacity 0.3s ease;
+    }
+    .job-detail.open { grid-template-rows: 1fr; opacity: 1; }
+    .job-detail > div { overflow: hidden; }
+    .job-detail ul, .job-detail p {
+      margin: 0.25rem 0 0;
+      padding: 1.25rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    .job-detail ul { padding-left: 2.75rem; }
+    .job-detail li + li { margin-top: 0.4rem; }
+
+    /* ---------- Speaking ---------- */
+    .talks {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) { .talks { grid-template-columns: 1fr 1fr; } }
+    .talk {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    /* Video thumbnail, or a plain play tile when there's no image */
+    .talk-media {
+      position: relative;
+      display: block;
+      aspect-ratio: 16 / 9;
+      background: var(--lavender-soft);
+      color: var(--lavender-ink);
+    }
+    .talk-media img { width: 100%; height: 100%; object-fit: cover; }
+    .talk-media .play {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 56px;
+      height: 56px;
+      padding: 14px;
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--rose);
+      transition: transform 0.2s;
+    }
+    a.talk-media:hover .play { transform: scale(1.1); }
+    a.talk-media:focus-visible { outline: 3px solid var(--lavender); outline-offset: -3px; }
+    .talk-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+    .talk-meta { margin: 0; font-size: 0.85rem; color: var(--muted); }
+    .talk h3 { margin: 0.5rem 0 0; text-transform: none; letter-spacing: 0; font-size: 1.3rem; line-height: 1.3; }
+    .talk-body > p:not(.talk-meta) { margin: 0.75rem 0 0; font-size: 1rem; }
+    .talk-link {
+      margin-top: auto;
+      padding-top: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--lavender-ink);
+    }
+    @media (prefers-color-scheme: dark) { .talk-link { color: var(--lavender); } }
+    .talk-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .talk-link .icon { width: 16px; height: 16px; }
+
+    /* ---------- Education & awards ---------- */
+    #education { background: var(--surface-alt); }
+    h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 1.25rem; }
+    .card {
+      display: flex;
+      gap: 1rem;
+      padding: 1.75rem;
+      border-radius: 6px;
+      margin-bottom: 1.25rem;
+    }
+    .card.lav { background: var(--lavender-soft); color: var(--lavender-ink); }
+    .card.rose { background: var(--rose-soft); color: var(--rose-ink); }
+    .card .icon { width: 26px; height: 26px; margin-top: 0.15rem; }
+    .card h4 { margin: 0; font-size: 1.2rem; font-weight: 700; line-height: 1.3; }
+    .card p { margin: 0.25rem 0 0; font-size: 0.95rem; }
+    .card .when { font-size: 0.85rem; opacity: 0.8; }
+    .card h4 a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .card p:not(.mono) { margin-top: 0.75rem; }
+
+    /* ---------- Contact ---------- */
+    .contact-form { display: grid; gap: 1.25rem; }
+    .contact-form label { display: grid; gap: 0.4rem; font-size: 0.95rem; font-weight: 600; }
+    .contact-form input, .contact-form textarea {
+      font: inherit;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      width: 100%;
+    }
+    .contact-form textarea { resize: vertical; min-height: 8rem; }
+    .contact-form input:focus, .contact-form textarea:focus { outline: 3px solid var(--lavender); outline-offset: 1px; border-color: var(--lavender); }
+    .contact-form button {
+      justify-self: start;
+      font: inherit;
+      font-weight: 700;
+      padding: 0.8rem 1.75rem;
+      border: 0;
+      border-radius: 6px;
+      background: var(--lavender);
+      color: #1e1b26;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover { background: var(--rose); }
+    .contact-form button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+    .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 2rem 0; text-align: center; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--border); }
+
+    /* ---------- Entrance animation ---------- */
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+    .rise { animation: slideUp 0.6s ease both; }
+    .rise-1 { animation-delay: 0.1s; }
+    .rise-2 { animation-delay: 0.2s; }
+    @media (prefers-reduced-motion: reduce) {
+      .rise, .job-detail, .chevron { animation: none; transition: none; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Inline icon sprite (paths from Lucide, ISC license) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+      <symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ===== HEADER ===== -->
+  <!-- ===== JUMP MENU ===== -->
+  <nav class="site-nav" aria-label="Page sections">
+    <div class="wrap">
+      <a class="nav-home" href="#top">Sundi Myint</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#speaking">Speaking</a>
+        <a href="#education">Education</a>
+      </div>
+      <a class="nav-contact" href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header id="top">
+    <div class="wrap grid-2">
+      <div class="hero-text">
+        <h1 class="name rise rise-1"><span>Sundi</span><span>Myint</span></h1>
+        <p class="title mono rise rise-2">Engineering Manager</p>
+      </div>
+      <div class="photo rise">
+        <img src="images/sm_profile.jpg" alt="Sundi Myint smiling outdoors" width="1100" height="1424">
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Welcome</h1>
-    <p>Hi, I'm Sundi Myint. A new site is on the way — check back soon.</p>
+
+    <!-- ===== ABOUT & EXPERTISE ===== -->
+    <section id="about">
+      <div class="wrap grid-2">
+        <div>
+          <h2>About</h2>
+          <p>Engineering manager, Elixir community speaker, podcaster, and team builder. I've spent 10+ years shipping high-traffic consumer products across automotive, travel, and restaurant industries, and 5+ years leading the web and mobile teams behind them. I like turning big strategy into results that are easy to see.</p>
+
+          <ul class="contact">
+            <li><svg class="icon"><use href="#i-linkedin"/></svg><a href="https://www.linkedin.com/in/sundimyint/">LinkedIn</a></li>
+            <li><svg class="icon"><use href="#i-pin"/></svg><span>Maryland, USA (Remote)</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Expertise</h2>
+          <!-- Alternate lav/rose classes in a checkerboard (lav, rose / rose, lav / ...) -->
+          <div class="skills">
+            <div class="skill lav">Multi-Team Leadership</div>
+            <div class="skill rose">Coaching &amp; Career Growth</div>
+            <div class="skill rose">Cross-Functional Alignment</div>
+            <div class="skill lav">Developer Productivity</div>
+            <div class="skill lav">Platform Migrations</div>
+            <div class="skill rose">Server-Driven UI</div>
+            <div class="skill rose">AI &amp; Agentic Workflows</div>
+            <div class="skill lav"><span>Elixir &amp; <span class="nowrap">Cross-Platform</span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience">
+      <div class="wrap">
+        <h2>Experience</h2>
+        <!-- One <li class="job"> per role, newest first. Each needs its own aria-controls/id number. -->
+        <ol class="timeline">
+          <li class="job">
+            <button class="job-toggle" aria-expanded="false" aria-controls="job-1">
+              <span>
+                <span class="job-role">Engineering Manager, Software</span>
+                <span class="job-company mono">Cars.com</span>
+                <span class="job-dates mono">2023 — Present</span>
+              </span>
+              <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="job-detail" id="job-1">
+              <div>
+                <p>I lead the Core Shopper Experience team behind Cars.com's Vehicle Details Page, the heart of the car-shopping experience for buyers and dealers alike. We rebuilt it on a Server-Driven UI architecture powered by Elixir, so one change now ships to web, iOS, and Android at once, getting features out 3x faster. I also championed AI tooling and agentic workflows that tripled our delivery speed and sparked internal tools now speeding up teams across the company. Along the way I keep the team growing and shipping, and take my turn as incident commander when production needs a steady hand.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="job">
+            <button class="job-toggle" aria-expanded="false" aria-controls="job-2">
+              <span>
+                <span class="job-role">Engineering Manager / Developer</span>
+                <span class="job-company mono">SmartLogic</span>
+                <span class="job-dates mono">2020 — 2023</span>
+              </span>
+              <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="job-detail" id="job-2">
+              <div>
+                <p>I started out building custom web and mobile apps for clients in Elixir, Flutter, and React Native, then got promoted to lead the engineering team. As a manager, I guided the careers of engineers spread across multiple client teams and tech stacks, and kept a busy slate of concurrent projects shipping on time. On the mic, I co-hosted the Elixir Wizards podcast, chatting with nearly 100 guests across tech communities.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="job">
+            <button class="job-toggle" aria-expanded="false" aria-controls="job-3">
+              <span>
+                <span class="job-role">Full Stack Engineer</span>
+                <span class="job-company mono">CAVA</span>
+                <span class="job-dates mono">2019 — 2020</span>
+              </span>
+              <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="job-detail" id="job-3">
+              <div>
+                <p>I was part of the team building CAVA's digital ordering experience for restaurants nationwide, contributing to the Elixir backend APIs that power it. On the front end, I helped ship fast, polished features in Phoenix, React, and React Native across web, iOS, and Android. Working hand in hand with Product and Design, our team brought real-time ordering features to life, built to scale.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="job">
+            <button class="job-toggle" aria-expanded="false" aria-controls="job-4">
+              <span>
+                <span class="job-role">Creative Technologist</span>
+                <span class="job-company mono">AKQA</span>
+                <span class="job-dates mono">Summer 2018</span>
+              </span>
+              <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="job-detail" id="job-4">
+              <div>
+                <p>I built a kiosk-based React prototype that reimagined the in-store checkout flow for a major U.S. retailer. Collaborating with Product, Design, back-of-house engineering, and QA, I helped turn the concept into a working proof of concept delivered to the client.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="job">
+            <button class="job-toggle" aria-expanded="false" aria-controls="job-5">
+              <span>
+                <span class="job-role">Full Stack Engineer</span>
+                <span class="job-company mono">Upside Travel</span>
+                <span class="job-dates mono">2017 — 2018</span>
+              </span>
+              <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="job-detail" id="job-5">
+              <div>
+                <p>I was part of the team that built Upside's post-purchase experience, bringing detailed UX mockups to life so travelers could view and manage the trips they'd booked. Behind the scenes, I helped maintain the backend services that kept trip data consistent across web, iOS, and Android.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="job">
+            <button class="job-toggle" aria-expanded="false" aria-controls="job-6">
+              <span>
+                <span class="job-role">Associate Software Engineer</span>
+                <span class="job-company mono">iCIMS (previously Jibe)</span>
+                <span class="job-dates mono">2014 — 2016</span>
+              </span>
+              <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="job-detail" id="job-6">
+              <div>
+                <p>I led a small engineering team on Jibe Apply, Jibe's flagship product, building custom-branded, white-labeled job application experiences. Our work went out to dozens of Fortune 500 clients, each with its own look and feel.</p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== SPEAKING ===== -->
+    <section id="speaking">
+      <div class="wrap">
+        <h2>Speaking</h2>
+        <!--
+          One <li class="talk"> per talk, newest first.
+          To add a YouTube video to a talk, put this right after <li class="talk">,
+          swapping VIDEO_ID (the code after "watch?v=" in the URL) and the title:
+
+            <a class="talk-media" href="https://www.youtube.com/watch?v=VIDEO_ID" aria-label="Watch TITLE on YouTube">
+              <img src="https://i.ytimg.com/vi/VIDEO_ID/hqdefault.jpg" alt="" loading="lazy">
+              <svg class="play" aria-hidden="true"><use href="#i-play"/></svg>
+            </a>
+
+          and this as the last line inside <div class="talk-body">:
+
+            <a class="talk-link" href="https://www.youtube.com/watch?v=VIDEO_ID">Watch on YouTube <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        -->
+        <ul class="talks">
+          <li class="talk">
+            <a class="talk-media" href="https://www.youtube.com/watch?v=G0wA5NTY1Rg" aria-label="Watch Empathy in Engineering on YouTube">
+              <img src="https://i.ytimg.com/vi/G0wA5NTY1Rg/hqdefault.jpg" alt="" loading="lazy">
+              <svg class="play" aria-hidden="true"><use href="#i-play"/></svg>
+            </a>
+            <div class="talk-body">
+              <p class="talk-meta mono">2025 · Keynote · Code BEAM Europe · Berlin, Germany</p>
+              <h3>Empathy in Engineering</h3>
+              <p>Explored the human side of Cars.com's Server-Driven UI architecture migration — unifying feature delivery across web, iOS, and Android — and how team collaboration and empathy shaped the outcome of a high-pressure technical transformation.</p>
+              <a class="talk-link" href="https://www.youtube.com/watch?v=G0wA5NTY1Rg">Watch on YouTube <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+            </div>
+          </li>
+
+          <li class="talk">
+            <a class="talk-media" href="https://www.youtube.com/watch?v=dm-fE7GOV04" aria-label="Watch A Practical Guide to Career Advancement for Elixir-ists on YouTube">
+              <img src="https://i.ytimg.com/vi/dm-fE7GOV04/hqdefault.jpg" alt="" loading="lazy">
+              <svg class="play" aria-hidden="true"><use href="#i-play"/></svg>
+            </a>
+            <div class="talk-body">
+              <p class="talk-meta mono">2024 · ElixirConf · Orlando, FL</p>
+              <h3>A Practical Guide to Career Advancement for Elixir-ists</h3>
+              <p>Delivered a talk on career growth for senior engineers, covering delegation, mentoring vs. coaching, and how to earn technical influence within a team and organization.</p>
+              <a class="talk-link" href="https://www.youtube.com/watch?v=dm-fE7GOV04">Watch on YouTube <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+            </div>
+          </li>
+
+          <li class="talk">
+            <a class="talk-media" href="https://www.youtube.com/watch?v=tdGsG2bC-nc" aria-label="Watch The Alchemy of Elixir Teams: An Engineering Manager&#39;s Tale on YouTube">
+              <img src="https://i.ytimg.com/vi/tdGsG2bC-nc/hqdefault.jpg" alt="" loading="lazy">
+              <svg class="play" aria-hidden="true"><use href="#i-play"/></svg>
+            </a>
+            <div class="talk-body">
+              <p class="talk-meta mono">2023 · ElixirConf · Orlando, FL</p>
+              <h3>The Alchemy of Elixir Teams: An Engineering Manager's Tale</h3>
+              <p>Presented on managing Elixir engineering teams — covering team communication styles, delivering feedback using the Situational-Behavior-Impact model, and balancing technical ambition with team productivity.</p>
+              <a class="talk-link" href="https://www.youtube.com/watch?v=tdGsG2bC-nc">Watch on YouTube <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+            </div>
+          </li>
+
+          <li class="talk">
+            <a class="talk-media" href="https://www.youtube.com/watch?v=qMScnpGhu4E" aria-label="Watch Stunt Doubles: Testing with Mox on YouTube">
+              <img src="https://i.ytimg.com/vi/qMScnpGhu4E/hqdefault.jpg" alt="" loading="lazy">
+              <svg class="play" aria-hidden="true"><use href="#i-play"/></svg>
+            </a>
+            <div class="talk-body">
+              <p class="talk-meta mono">2021 · ElixirConf · Austin, TX</p>
+              <h3>Stunt Doubles: Testing with Mox</h3>
+              <p>Presented best practices for using Mox in Elixir test suites, covering how to design effective behaviours for accurate mocking and maintainable, easy-to-follow test coverage.</p>
+              <a class="talk-link" href="https://www.youtube.com/watch?v=qMScnpGhu4E">Watch on YouTube <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+            </div>
+          </li>
+
+          <li class="talk">
+            <a class="talk-media" href="https://www.youtube.com/watch?v=NX2V3eg0aok" aria-label="Watch A Fireside Chat on Adopting Elixir on YouTube">
+              <img src="https://i.ytimg.com/vi/NX2V3eg0aok/hqdefault.jpg" alt="" loading="lazy">
+              <svg class="play" aria-hidden="true"><use href="#i-play"/></svg>
+            </a>
+            <div class="talk-body">
+              <p class="talk-meta mono">2021 · Code BEAM V America (Virtual) · with Ben Marx</p>
+              <h3>A Fireside Chat on Adopting Elixir</h3>
+              <p>Discussed key considerations for organizations adopting Elixir, from team readiness to long-term technical tradeoffs, in a fireside chat format.</p>
+              <a class="talk-link" href="https://www.youtube.com/watch?v=NX2V3eg0aok">Watch on YouTube <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== EDUCATION & AWARDS ===== -->
+    <section id="education">
+      <div class="wrap">
+        <h2>Education &amp; Awards</h2>
+        <div class="grid-2">
+          <div>
+            <h3>Education</h3>
+            <div class="card lav">
+              <svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg>
+              <div>
+                <h4>B.A. in Studio Art</h4>
+                <p class="mono">University of Maryland, College Park</p>
+                <p class="mono when">2015</p>
+                <p>Digital media focus, blending code, visual design, and user experience.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Awards</h3>
+            <div class="card rose">
+              <svg class="icon" aria-hidden="true"><use href="#i-trophy"/></svg>
+              <div>
+                <h4><a href="https://technical.ly/software-development/reallist-engineers-2020-dctech-influential-software-developers/">RealLIST Engineers 2020</a></h4>
+                <p class="mono">Technical.ly</p>
+                <p class="mono when">2020</p>
+                <p>Named one of 16 influential technologists building the DC tech community.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+      <div class="wrap grid-2">
+        <div>
+          <h2>Contact</h2>
+          <p>Have a question, an opportunity, or a speaking invitation? Send me a note here.</p>
+        </div>
+
+        <!-- Submissions go to Formspree, which checks for bots and emails each message on. -->
+        <form class="contact-form" action="https://formspree.io/f/xvkzzzoz" method="POST">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="6" required></textarea>
+          </label>
+          <!-- Honeypot: hidden from people; bots that fill it in get filtered out -->
+          <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit">Send message</button>
+        </form>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="mono">
+    <div class="wrap">© 2026 Sundi Myint</div>
+  </footer>
+
+  <script>
+    // Jump menu: highlight the link for the section currently in view
+    const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]:not(.nav-home)')];
+    const navSections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+    const linkStrip = document.querySelector('.nav-links');
+    let currentLink = null;
+
+    function updateCurrentSection() {
+      const navHeight = document.querySelector('.site-nav').offsetHeight;
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      let index = -1;
+      navSections.forEach((section, i) => {
+        if (section.getBoundingClientRect().top <= navHeight + window.innerHeight * 0.3) index = i;
+      });
+      // The last section may be too short to reach the top, so treat the page bottom as "in it"
+      if (atBottom) index = navSections.length - 1;
+
+      const link = navLinks[index] || null;
+      if (link === currentLink) return;
+      navLinks.forEach(a => a.removeAttribute('aria-current'));
+      if (link) {
+        link.setAttribute('aria-current', 'true');
+        // On narrow screens, slide the active link into view inside the menu strip
+        if (linkStrip.contains(link)) {
+          const strip = linkStrip.getBoundingClientRect();
+          const box = link.getBoundingClientRect();
+          if (box.left < strip.left || box.right > strip.right - 24) {
+            linkStrip.scrollTo({ left: link.offsetLeft - linkStrip.offsetLeft - 8, behavior: 'smooth' });
+          }
+        }
+      }
+      currentLink = link;
+    }
+    window.addEventListener('scroll', updateCurrentSection, { passive: true });
+    window.addEventListener('resize', updateCurrentSection);
+    updateCurrentSection();
+
+    // Expanding job cards: only one open at a time
+    const toggles = document.querySelectorAll('.job-toggle');
+    toggles.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const opening = btn.getAttribute('aria-expanded') !== 'true';
+        toggles.forEach(other => {
+          other.setAttribute('aria-expanded', 'false');
+          document.getElementById(other.getAttribute('aria-controls')).classList.remove('open');
+        });
+        if (opening) {
+          btn.setAttribute('aria-expanded', 'true');
+          document.getElementById(btn.getAttribute('aria-controls')).classList.add('open');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

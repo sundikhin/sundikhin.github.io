@@ -1,0 +1,5 @@
+.DS_Store
+.claude/
+
+# Original full-size photo; the site uses the resized sm_profile.jpg
+images/sm_profile.png
