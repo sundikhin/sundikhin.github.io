@@ -3,3 +3,7 @@
 
 # Original full-size photo; the site uses the resized sm_profile.jpg
 images/sm_profile.png
+
+# Original photos from the camera roll; the site uses the resized about-*.jpg copies
+images/*.heic
+images/*_1_105_c.jpeg

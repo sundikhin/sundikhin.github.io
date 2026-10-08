@@ -179,7 +179,10 @@
       object-position: center 30%;
     }
 
-    /* ---------- About & skills ---------- */
+    /* Shaded sections alternate with plain ones down the page */
+    #expertise, #speaking, #contact { background: var(--surface-alt); }
+
+    /* ---------- About ---------- */
     .contact { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; gap: 0.75rem; font-size: 1rem; }
     .contact li { display: flex; align-items: center; gap: 0.6rem; }
     .contact a { text-decoration: none; border-bottom: 2px solid var(--lavender-soft); }
@@ -197,8 +200,57 @@
     .skill.lav { background: var(--lavender-soft); color: var(--lavender-ink); }
     .skill.rose { background: var(--rose-soft); color: var(--rose-ink); }
 
+    /* Photo collage: one wide photo on top, two side by side below */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      align-self: center;
+    }
+    .photo-grid figure {
+      margin: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--lavender-soft);
+      color: var(--lavender-ink);
+    }
+    .photo-grid figure { aspect-ratio: 4 / 3; }
+    .photo-grid figure:first-child { grid-column: span 2; aspect-ratio: 3 / 2; }
+    .photo-grid figure:nth-child(2) { background: var(--rose-soft); color: var(--rose-ink); }
+    .photo-grid img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- Expertise ---------- */
+    .skills button {
+      font: inherit;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skills button:hover { border-color: currentColor; }
+    .skills button[aria-selected="true"] { border-color: currentColor; transform: scale(1.03); }
+    .skills button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+    /* Panels share one grid cell, so the area is always as tall as the longest
+       blurb and the page doesn't jump when switching skills */
+    .skill-panels { display: grid; }
+    .skill-panels > .skill-panel { grid-area: 1 / 1; }
+    .skill-panel[hidden] { display: block; visibility: hidden; }
+    .skill-panel {
+      height: 100%;
+      padding: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 6px solid var(--lavender);
+      border-radius: 6px;
+    }
+    .skill-panel.rose { border-top-color: var(--rose); }
+    .skill-panel h3 { margin-bottom: 1rem; }
+    .skill-panel p { margin: 0; font-size: 1rem; }
+    .skill-panel p + p { margin-top: 0.75rem; }
+    .skill-panel:focus-visible { outline: 3px solid var(--lavender); outline-offset: 2px; }
+
     /* ---------- Experience timeline ---------- */
-    #experience { background: var(--surface-alt); }
     .timeline { position: relative; list-style: none; margin: 0; padding: 0; }
     .timeline::before {
       content: "";
@@ -215,7 +267,7 @@
       width: 21px; height: 21px;
       border-radius: 50%;
       background: var(--rose);
-      border: 4px solid var(--surface-alt);
+      border: 4px solid var(--bg);
     }
     .job-toggle {
       all: unset;
@@ -328,7 +380,6 @@
     .talk-link .icon { width: 16px; height: 16px; }
 
     /* ---------- Education & awards ---------- */
-    #education { background: var(--surface-alt); }
     h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 1.25rem; }
     .card {
       display: flex;
@@ -402,6 +453,7 @@
       <symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
       <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"/></symbol>
       <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></symbol>
     </defs>
   </svg>
 
@@ -412,6 +464,7 @@
       <a class="nav-home" href="#top">Sundi Myint</a>
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
         <a href="#experience">Experience</a>
         <a href="#speaking">Speaking</a>
         <a href="#education">Education</a>
@@ -439,32 +492,89 @@
       <div class="wrap grid-2">
         <div>
           <h2>About</h2>
-          <p>Engineering manager, Elixir community speaker, podcaster, and team builder. I've spent 10+ years shipping high-traffic consumer products across automotive, travel, and restaurant industries, and 5+ years leading the web and mobile teams behind them. I like turning big strategy into results that are easy to see.</p>
+          <p>Engineering manager, Elixir community speaker, podcaster, and team builder. I've spent 10+ years shipping high-traffic consumer products across automotive, travel, and restaurant industries, and 5+ years leading the web and mobile teams behind them. I thrive on teams that are down to chat about good code, good coffee, and get infinitely distracted by pets on the screen.</p>
 
           <ul class="contact">
             <li><svg class="icon"><use href="#i-linkedin"/></svg><a href="https://www.linkedin.com/in/sundimyint/">LinkedIn</a></li>
+            <li><svg class="icon"><use href="#i-mic"/></svg><a href="https://smartlogic.io/podcast/elixir-wizards/">Elixir Wizards podcast</a></li>
             <li><svg class="icon"><use href="#i-pin"/></svg><span>Maryland, USA (Remote)</span></li>
           </ul>
         </div>
 
-        <div>
-          <h2>Expertise</h2>
-          <!-- Alternate lav/rose classes in a checkerboard (lav, rose / rose, lav / ...) -->
-          <div class="skills">
-            <div class="skill lav">Multi-Team Leadership</div>
-            <div class="skill rose">Coaching &amp; Career Growth</div>
-            <div class="skill rose">Cross-Functional Alignment</div>
-            <div class="skill lav">Developer Productivity</div>
-            <div class="skill lav">Platform Migrations</div>
-            <div class="skill rose">Server-Driven UI</div>
-            <div class="skill rose">AI &amp; Agentic Workflows</div>
-            <div class="skill lav"><span>Elixir &amp; <span class="nowrap">Cross-Platform</span></span></div>
+        <!--
+          About photos. To swap one, save it in images/ and change its src and alt.
+          The top photo is wide (3:2); the two below are 4:3. Photos are cropped to fit.
+        -->
+        <div class="photo-grid">
+          <figure>
+            <img src="images/about-speaking.jpg" alt="Sundi speaking on stage at Code BEAM Europe 2025 in Berlin" width="1086" height="724" loading="lazy">
+          </figure>
+          <figure>
+            <img src="images/about-community.jpg" alt="Sundi with friends at EMPEX in NYC 2023" width="800" height="533" loading="lazy">
+          </figure>
+          <figure>
+            <img src="images/about-stickers.jpg" alt="A pile of Elixir community stickers, including Elixir Wizards podcast stickers" width="800" height="600" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERTISE ===== -->
+    <section id="expertise">
+      <div class="wrap">
+        <h2>Expertise</h2>
+        <div class="grid-2">
+          <!-- Each button shows the matching panel on the right. Keep lav/rose in a checkerboard. -->
+          <div class="skills" role="tablist" aria-label="Areas of expertise">
+            <button class="skill lav" role="tab" id="tab-multi-team" aria-controls="panel-multi-team" aria-selected="true" tabindex="0"><span>Multi-Team Leadership</span></button>
+            <button class="skill rose" role="tab" id="tab-coaching" aria-controls="panel-coaching" aria-selected="false" tabindex="-1"><span>Coaching &amp; Career Growth</span></button>
+            <button class="skill rose" role="tab" id="tab-alignment" aria-controls="panel-alignment" aria-selected="false" tabindex="-1"><span><span class="nowrap">Cross-Functional</span> Alignment</span></button>
+            <button class="skill lav" role="tab" id="tab-productivity" aria-controls="panel-productivity" aria-selected="false" tabindex="-1"><span>Developer Productivity</span></button>
+            <button class="skill lav" role="tab" id="tab-migrations" aria-controls="panel-migrations" aria-selected="false" tabindex="-1"><span>Platform Migrations</span></button>
+            <button class="skill rose" role="tab" id="tab-platforms" aria-controls="panel-platforms" aria-selected="false" tabindex="-1"><span>One Team, Every Platform</span></button>
+            <button class="skill rose" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="false" tabindex="-1"><span>AI &amp; Agentic Workflows</span></button>
+            <button class="skill lav" role="tab" id="tab-elixir" aria-controls="panel-elixir" aria-selected="false" tabindex="-1"><span>Elixir Community</span></button>
+          </div>
+
+          <!-- One panel per button; ids must match the button's aria-controls -->
+          <div class="skill-panels">
+          <div class="skill-panel lav" role="tabpanel" id="panel-multi-team" aria-labelledby="tab-multi-team" tabindex="0">
+            <h3>Multi-Team Leadership</h3>
+            <p>Leading across multiple teams is a lot like hosting a big dinner: everyone's working on something different, and my job is making sure it all comes together at the same table. I've worked with engineers at every stage, from folks in their first role to Staff and Principal Engineers, and each group needs something a little different from a manager. For senior engineers, that usually means context over control. I've also led fully remote teams for years, and I've learned that connection doesn't happen by accident; you have to build it on purpose.</p>
+          </div>
+          <div class="skill-panel rose" role="tabpanel" id="panel-coaching" aria-labelledby="tab-coaching" tabindex="0" hidden>
+            <h3>Coaching &amp; Career Growth</h3>
+            <p>Watching someone grow into their next role is hands-down my favorite part of the job. I'm a big believer that growth conversations shouldn't wait for review season, so they're a regular part of how my teams work, along with mentorship, learning days, and lightning talks. I love seeing people take on something a little scary and come out the other side more confident. I've even given a conference talk on career advancement for engineers, because it's a topic I could talk about all day.</p>
+          </div>
+          <div class="skill-panel rose" role="tabpanel" id="panel-alignment" aria-labelledby="tab-alignment" tabindex="0" hidden>
+            <h3>Cross-Functional Alignment</h3>
+            <p>Great products come from Engineering, Product, and Design working as true partners, not as a relay race. I like bringing people into the conversation early, keeping trade-offs out in the open, and making sure everyone feels heard before decisions get made. It's less glamorous than shipping features, but it's what makes shipping possible. When the roadmap makes sense to everyone who depends on it, that's a good day.</p>
+          </div>
+          <div class="skill-panel lav" role="tabpanel" id="panel-productivity" aria-labelledby="tab-productivity" tabindex="0" hidden>
+            <h3>Developer Productivity</h3>
+            <p>I think about developer productivity as removing the friction that keeps engineers from their best work, not squeezing more output out of people. That might mean better tooling, clearer processes, or rethinking how we measure growth so it reflects the whole picture rather than a single number. I've gotten especially interested in how developer-experience data can make performance conversations fairer and more grounded. The goal is simple: work should never feel like a slog.</p>
+          </div>
+          <div class="skill-panel lav" role="tabpanel" id="panel-migrations" aria-labelledby="tab-migrations" tabindex="0" hidden>
+            <h3>Platform Migrations</h3>
+            <p>Big migrations are as much about people as they are about code. When you're changing a system that lots of teams depend on, the hardest part is keeping everyone's trust while the ground shifts beneath them. I've led one of these from start to finish, and my favorite outcome was seeing other teams build on the foundation we created. I liked the human side of that story so much that I gave a keynote about it, “Empathy in Engineering,” at Code BEAM Europe 2025.</p>
+          </div>
+          <div class="skill-panel rose" role="tabpanel" id="panel-platforms" aria-labelledby="tab-platforms" tabindex="0" hidden>
+            <h3>One Team, Every Platform</h3>
+            <p>Some of my favorite work has been leading teams where web, iOS, and Android engineers sit side by side, shaping features together from the very first conversation. I've seen the alternative too, where mobile is the last stop and features arrive months after web, and it's no fun for anyone, especially users. With the right architecture and the right habits, a single change can launch on every platform at once, and the whole team gets to celebrate together. Watching engineers from different disciplines learn from each other and find their groove is one of the most rewarding parts of my job.</p>
+          </div>
+          <div class="skill-panel rose" role="tabpanel" id="panel-ai" aria-labelledby="tab-ai" tabindex="0" hidden>
+            <h3>AI &amp; Agentic Workflows</h3>
+            <p>AI has made the engineering toolbelt a whole lot wider, and I've loved exploring what's possible with my team. Rather than chasing “10x” headlines, I'm most excited about handing AI the tedious work, like cleaning up old code or triaging bugs, so people can spend more time on the interesting problems. I try to encourage a “what if…” curiosity, where anyone can try out an idea for a new tool. Some of our favorite quality-of-life improvements started that way.</p>
+          </div>
+          <div class="skill-panel lav" role="tabpanel" id="panel-elixir" aria-labelledby="tab-elixir" tabindex="0" hidden>
+            <h3>Elixir Community</h3>
+            <p>Elixir has been a big part of my career, from building products in it to hiring and growing teams that love it as much as I do. Somewhere along the way, the community became just as important to me as the language. I am a co-host on the Elixir Wizards podcast, where I've had the chance to interview a ton of incredible guests, and I've spoken at conferences like ElixirConf and Code BEAM, including a keynote in Berlin. I've also organized the DC Elixir Meetup and emceed a variety of Elixir conferences.</p>
+          </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== EXPERIENCE ===== -->
     <section id="experience">
       <div class="wrap">
         <h2>Experience</h2>
@@ -761,6 +871,29 @@
     window.addEventListener('scroll', updateCurrentSection, { passive: true });
     window.addEventListener('resize', updateCurrentSection);
     updateCurrentSection();
+
+    // Expertise: each skill button shows its panel; arrow keys move between buttons
+    const skillTabs = [...document.querySelectorAll('.skills [role="tab"]')];
+    function selectSkill(tab, moveFocus) {
+      skillTabs.forEach(t => {
+        const selected = t === tab;
+        t.setAttribute('aria-selected', selected);
+        t.tabIndex = selected ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
+      });
+      if (moveFocus) tab.focus();
+    }
+    skillTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => selectSkill(tab, false));
+      tab.addEventListener('keydown', e => {
+        const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+        let next = null;
+        if (step) next = skillTabs[(i + step + skillTabs.length) % skillTabs.length];
+        if (e.key === 'Home') next = skillTabs[0];
+        if (e.key === 'End') next = skillTabs[skillTabs.length - 1];
+        if (next) { e.preventDefault(); selectSkill(next, true); }
+      });
+    });
 
     // Expanding job cards: only one open at a time
     const toggles = document.querySelectorAll('.job-toggle');
