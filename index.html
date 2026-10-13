@@ -311,6 +311,25 @@
       line-height: 1.2;
     }
     .job-company { display: block; margin-top: 0.25rem; font-size: 1rem; }
+    /* Company logos: a tile beside the title on wider screens, a small badge above it on phones */
+    .job-head { display: flex; align-items: center; gap: 1.25rem; min-width: 0; }
+    .job-text { min-width: 0; }
+    .job-logo {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 0 0 1px var(--border);
+    }
+    /* For logos with a transparent background: give them a white tile so they show in dark mode too */
+    .job-logo-pad { background: #fff; padding: 5px; object-fit: contain; }
+    .chevron { flex-shrink: 0; }
+    @media (max-width: 600px) {
+      .job-head { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .job-logo { width: 36px; height: 36px; border-radius: 6px; }
+      .job-logo-pad { padding: 4px; }
+    }
     .job-dates { display: block; margin-top: 0.4rem; font-size: 0.875rem; color: var(--muted); }
     .chevron { width: 24px; height: 24px; color: var(--lavender); transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
     .job-toggle[aria-expanded="true"] .chevron { transform: rotate(180deg); }
@@ -598,10 +617,13 @@
         <ol class="timeline">
           <li class="job">
             <button class="job-toggle" aria-expanded="false" aria-controls="job-1" data-track="experience-cars-com">
-              <span>
-                <span class="job-role">Engineering Manager, Software</span>
-                <span class="job-company mono">Cars.com</span>
-                <span class="job-dates mono">2023 — Present</span>
+              <span class="job-head">
+                <img class="job-logo" src="images/logos/cars.png" alt="" width="48" height="48" loading="lazy">
+                <span class="job-text">
+                  <span class="job-role">Engineering Manager, Software</span>
+                  <span class="job-company mono">Cars.com</span>
+                  <span class="job-dates mono">2023 — Present</span>
+                </span>
               </span>
               <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
             </button>
@@ -614,10 +636,13 @@
 
           <li class="job">
             <button class="job-toggle" aria-expanded="false" aria-controls="job-2" data-track="experience-smartlogic">
-              <span>
-                <span class="job-role">Engineering Manager / Developer</span>
-                <span class="job-company mono">SmartLogic</span>
-                <span class="job-dates mono">2020 — 2023</span>
+              <span class="job-head">
+                <img class="job-logo job-logo-pad" src="images/logos/smartlogic.png" alt="" width="48" height="48" loading="lazy">
+                <span class="job-text">
+                  <span class="job-role">Engineering Manager / Developer</span>
+                  <span class="job-company mono">SmartLogic</span>
+                  <span class="job-dates mono">2020 — 2023</span>
+                </span>
               </span>
               <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
             </button>
@@ -630,10 +655,13 @@
 
           <li class="job">
             <button class="job-toggle" aria-expanded="false" aria-controls="job-3" data-track="experience-cava">
-              <span>
-                <span class="job-role">Full Stack Engineer</span>
-                <span class="job-company mono">CAVA</span>
-                <span class="job-dates mono">2019 — 2020</span>
+              <span class="job-head">
+                <img class="job-logo" src="images/logos/cava.png" alt="" width="48" height="48" loading="lazy">
+                <span class="job-text">
+                  <span class="job-role">Full Stack Engineer</span>
+                  <span class="job-company mono">CAVA</span>
+                  <span class="job-dates mono">2019 — 2020</span>
+                </span>
               </span>
               <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
             </button>
@@ -646,10 +674,13 @@
 
           <li class="job">
             <button class="job-toggle" aria-expanded="false" aria-controls="job-4" data-track="experience-akqa">
-              <span>
-                <span class="job-role">Creative Technologist</span>
-                <span class="job-company mono">AKQA</span>
-                <span class="job-dates mono">Summer 2018</span>
+              <span class="job-head">
+                <img class="job-logo" src="images/logos/akqa.png" alt="" width="48" height="48" loading="lazy">
+                <span class="job-text">
+                  <span class="job-role">Creative Technologist</span>
+                  <span class="job-company mono">AKQA</span>
+                  <span class="job-dates mono">Summer 2018</span>
+                </span>
               </span>
               <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
             </button>
@@ -662,10 +693,13 @@
 
           <li class="job">
             <button class="job-toggle" aria-expanded="false" aria-controls="job-5" data-track="experience-upside-travel">
-              <span>
-                <span class="job-role">Full Stack Engineer</span>
-                <span class="job-company mono">Upside Travel</span>
-                <span class="job-dates mono">2017 — 2018</span>
+              <span class="job-head">
+                <img class="job-logo" src="images/logos/upside.png" alt="" width="48" height="48" loading="lazy">
+                <span class="job-text">
+                  <span class="job-role">Full Stack Engineer</span>
+                  <span class="job-company mono">Upside Travel</span>
+                  <span class="job-dates mono">2017 — 2018</span>
+                </span>
               </span>
               <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
             </button>
@@ -678,10 +712,13 @@
 
           <li class="job">
             <button class="job-toggle" aria-expanded="false" aria-controls="job-6" data-track="experience-icims">
-              <span>
-                <span class="job-role">Associate Software Engineer</span>
-                <span class="job-company mono">iCIMS (previously Jibe)</span>
-                <span class="job-dates mono">2014 — 2016</span>
+              <span class="job-head">
+                <img class="job-logo" src="images/logos/icims.png" alt="" width="48" height="48" loading="lazy">
+                <span class="job-text">
+                  <span class="job-role">Associate Software Engineer</span>
+                  <span class="job-company mono">iCIMS (previously Jibe)</span>
+                  <span class="job-dates mono">2014 — 2016</span>
+                </span>
               </span>
               <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
             </button>
@@ -733,7 +770,7 @@
               <svg class="play" aria-hidden="true"><use href="#i-play"/></svg>
             </a>
             <div class="talk-body">
-              <p class="talk-meta mono">2024 · ElixirConf · Orlando, FL</p>
+              <p class="talk-meta mono">2024 · ElixirConf · Orlando, FL · with Christian Koch</p>
               <h3>A Practical Guide to Career Advancement for Elixir-ists</h3>
               <p>Delivered a talk on career growth for senior engineers, covering delegation, mentoring vs. coaching, and how to earn technical influence within a team and organization.</p>
               <a class="talk-link" href="https://www.youtube.com/watch?v=dm-fE7GOV04" data-goatcounter-click="talk-career-advancement">Watch on YouTube <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
