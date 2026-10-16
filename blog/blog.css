@@ -433,44 +433,48 @@ footer { padding: 2rem 0; text-align: center; font-size: 0.8rem; letter-spacing:
 .show-notes .note-body { font-size: 0.95rem; line-height: 1.45; }
 @media (max-width: 480px) { .show-notes .note-card { grid-template-columns: 5.5rem 1fr; } }
 
-/* ---------- Header photo ----------
-   An optional post photo fills the header band behind the title. A gradient in the
-   header colour runs from solid at the top left to clear at the bottom right, so the
-   title and byline stay readable while the photo shows through on the right. */
-.post-header.with-photo { position: relative; isolation: isolate; overflow: hidden; }
-.post-header.with-photo::before,
-.post-header.with-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; }
-.post-header.with-photo::before { background: var(--cover) center 35% / cover no-repeat; z-index: -2; }
-/* Wider screens: the photo fills only the right part of the band, so the subject lands in
-   the clear area. Its left edge fades out so there's no hard line. */
+/* ---------- Header photo: diagonal split ----------
+   An optional post photo sits on the right of the header behind a diagonal edge with a
+   thin rose line. The title stays on plain lavender to the left. Set the photo with
+   --cover on the header; --cover-pos (and --cover-pos-mobile) move the crop if the
+   subject isn't centred. */
+.post-header.with-photo {
+  --photo-w: 42%;
+  --slant: 38%;
+  --edge: 5px;
+  position: relative;
+  overflow: hidden;
+}
 @media (min-width: 768px) {
-  .post-header.with-photo::before {
-    left: auto;
-    width: 68%;
-    background-position: center 40%;
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 30%);
-    mask-image: linear-gradient(to right, transparent, #000 30%);
-  }
+  .post-header.with-photo { --photo-w: 48%; --slant: 22%; --edge: 6px; }
 }
+.post-header.with-photo .wrap { position: relative; z-index: 1; }
+.post-header.with-photo::before,
+.post-header.with-photo::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: var(--photo-w); }
+.post-header.with-photo::before { background: var(--rose); clip-path: polygon(var(--slant) 0, 100% 0, 100% 100%, 0 100%); }
 .post-header.with-photo::after {
-  background: linear-gradient(to bottom right,
-    var(--hero) 0%,
-    var(--hero) 40%,
-    color-mix(in srgb, var(--hero) 70%, transparent) 60%,
-    transparent 100%);
+  background: var(--cover) var(--cover-pos-mobile, var(--cover-pos, center)) / cover no-repeat;
+  clip-path: polygon(calc(var(--slant) + var(--edge)) 0, 100% 0, 100% 100%, var(--edge) 100%);
 }
-/* Narrow screens: the title spans most of the width, so keep more of the header solid */
+@media (min-width: 768px) {
+  .post-header.with-photo::after { background-position: var(--cover-pos, center); }
+}
+
+/* Keep the title and byline on the lavender side, clear of the photo */
 @media (max-width: 767px) {
-  .post-header.with-photo::after {
-    background: linear-gradient(to bottom right,
-      var(--hero) 0%,
-      var(--hero) 55%,
-      color-mix(in srgb, var(--hero) 75%, transparent) 75%,
-      color-mix(in srgb, var(--hero) 20%, transparent) 100%);
-  }
+  .post-header.with-photo { padding: 1.75rem 0; }
+  .post-header.with-photo .wrap > * { max-width: 64%; }
+  .post-header.with-photo h1 { font-size: 1.7rem; }
+  .post-header.with-photo .byline { margin-top: 1.25rem; }
+  .post-header.with-photo .byline img { display: none; }
+  .post-header.with-photo .meta { white-space: nowrap; font-size: 0.78rem; }
 }
-/* Show notes without a thumbnail use the full card width */
-.show-notes .note-card:not(:has(img)) { grid-template-columns: 1fr; }
+@media (min-width: 768px) and (max-width: 1099px) {
+  .post-header.with-photo .wrap > * { max-width: calc(52vw - max(0px, (100vw - 44rem) / 2) - 3.5rem); }
+}
+@media (min-width: 1100px) {
+  .post-header.with-photo .wrap > * { max-width: calc(52vw - max(0px, (100vw - 64rem) / 2) - 3.5rem); }
+}
 
 /* ---------- "Your turn" form ----------
    A centred modal on desktop and tablet; a bottom sheet that slides up on phones. */
