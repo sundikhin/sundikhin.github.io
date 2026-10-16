@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Hallway Track | Sundi Myint</title>
+  <link rel="canonical" href="https://sundimyint.com/blog/">
+  <meta name="description" content="Tech, teams, and tangents. A blog by Sundi Myint for the musings that start between conference talks.">
+
+  <!-- Link previews: reuses the main site's share card for now -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sundi Myint">
+  <meta property="og:url" content="https://sundimyint.com/blog/">
+  <meta property="og:title" content="Hallway Track | Sundi Myint">
+  <meta property="og:description" content="Tech, teams, and tangents. A blog by Sundi Myint for the musings that start between conference talks.">
+  <meta property="og:image" content="https://sundimyint.com/images/share.jpg?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sundi Myint, Engineering Manager">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <nav class="site-nav" aria-label="Site">
+    <div class="wrap">
+      <a class="nav-home" href="/">Sundi Myint</a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#expertise">Expertise</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#speaking">Speaking</a>
+        <a href="/#education">Education</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+      </div>
+      <a class="nav-contact" href="/#contact" data-goatcounter-click="blog-nav-contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="blog-hero">
+    <div class="wrap">
+      <div>
+        <h1 class="rise rise-1">Hallway Track</h1>
+        <p class="title mono rise rise-2">Tech, teams, and tangents</p>
+      </div>
+      <p class="intro rise rise-2">A blog for the musings that start with &ldquo;wait, can I ask you something?&rdquo; between talks and run right through the next session. Welcome to the hallway track.</p>
+    </div>
+  </header>
+
+  <main class="posts">
+    <div class="wrap">
+      <p class="section-label mono">Featured</p>
+      <a class="featured" href="hello-world.html" data-goatcounter-click="blog-featured">
+        <img src="../images/about-speaking.jpg" alt="">
+        <div class="featured-body">
+          <ul class="tags"><li><span class="tag lav">Community</span></li><li><span class="tag lav">AI</span></li><li><span class="tag lav">Management</span></li></ul>
+          <h2>Hello, World!</h2>
+          <p class="excerpt">I have <em>thoughts</em> on the tech industry. It's time for a blog. We're doing the thing.</p>
+          <p class="meta mono">Oct 16, 2026 · 3 min read</p>
+          <span class="read-more">Read the post →</span>
+        </div>
+      </a>
+
+      <div class="list-head">
+        <p class="section-label mono">All posts</p>
+        <div class="filters" role="group" aria-label="Filter posts by topic">
+          <button type="button" aria-pressed="true" data-filter="all">All</button>
+          <button type="button" aria-pressed="false" data-filter="community">Community</button>
+          <button type="button" aria-pressed="false" data-filter="ai">AI</button>
+          <button type="button" aria-pressed="false" data-filter="management">Management</button>
+        </div>
+      </div>
+      <ul class="post-list">
+        <li class="post-row" data-tags="community ai management">
+          <a href="hello-world.html">
+            <span class="date mono">Oct 16, 2026</span>
+            <div>
+              <h3>Hello, World!</h3>
+              <p class="excerpt">I have <em>thoughts</em> on the tech industry. It's time for a blog. We're doing the thing.</p>
+              <ul class="tags"><li><span class="tag lav">Community</span></li><li><span class="tag lav">AI</span></li><li><span class="tag lav">Management</span></li></ul>
+            </div>
+            <span class="time mono">3 min</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="subscribe">
+        <p><strong>Want to chat?</strong>Every post starts with a question. I'd love to hear your answer.</p>
+        <a class="btn" href="/#contact" data-ask data-goatcounter-click="blog-get-in-touch">Get in touch</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mono">
+    <div class="wrap">© 2026 Sundi Myint</div>
+  </footer>
+
+  <script>
+    // Topic filter: show only posts tagged with the selected topic
+    const filterButtons = document.querySelectorAll('.filters button');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const topic = button.dataset.filter;
+        if (button.getAttribute('aria-pressed') === 'true') return;
+        filterButtons.forEach(b => b.setAttribute('aria-pressed', b === button));
+        trackEvent('blog-filter-' + topic, button.textContent.trim());
+        document.querySelectorAll('.post-row').forEach(row => {
+          row.hidden = topic !== 'all' && !row.dataset.tags.split(' ').includes(topic);
+        });
+      });
+    });
+  </script>
+  <script src="blog.js"></script>
+  <!-- GoatCounter visitor stats (cookieless): https://sundikhin.goatcounter.com -->
+  <script data-goatcounter="https://sundikhin.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
