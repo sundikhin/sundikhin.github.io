@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="post-title" content="Are We Actually Shipping Faster with AI?">
+  <title>Are We Actually Shipping Faster with AI? | Hallway Track</title>
+  <link rel="canonical" href="https://sundimyint.com/blog/mythical-man-month.html">
+  <meta name="description" content="We're producing a lot more code with AI. Are we shipping any faster? Rereading The Mythical Man-Month to find out.">
+
+  <!-- Link previews: reuses the main site's share card for now -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Sundi Myint">
+  <meta property="og:url" content="https://sundimyint.com/blog/mythical-man-month.html">
+  <meta property="og:title" content="Are We Actually Shipping Faster with AI? | Hallway Track">
+  <meta property="og:description" content="We're producing a lot more code with AI. Are we shipping any faster? Rereading The Mythical Man-Month to find out.">
+  <meta property="og:image" content="https://sundimyint.com/images/share.jpg?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sundi Myint, Engineering Manager">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <nav class="site-nav" aria-label="Site">
+    <div class="wrap">
+      <a class="nav-home" href="/">Sundi Myint</a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#expertise">Expertise</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#speaking">Speaking</a>
+        <a href="/#education">Education</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+      </div>
+      <a class="nav-contact" href="/#contact" data-goatcounter-click="blog-nav-contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="post-header with-photo" style="--cover: url('../images/blog/mythical-man-month.jpg'); --cover-pos: 50% 55%; --cover-pos-mobile: 42% 50%">
+    <div class="wrap narrow">
+      <a class="back mono" href="./">← Hallway Track</a>
+      <h1 class="rise rise-1">Are We Actually Shipping Faster with AI?</h1>
+      <div class="byline">
+        <img src="../images/sm_profile.jpg" alt="">
+        <div>
+          <span class="byline-name">Sundi Myint</span>
+          <span class="meta mono">Oct 19, 2026 · 6 min read</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article class="wrap narrow prose">
+    <p class="opener">Okay, riddle me this. We've been using AI to assist us for nearly a year now, right? So do we feel like we're moving faster? Are we shipping code to our users &mdash; our consumers and customers &mdash; at a faster rate?</p>
+
+    <p>Because that's usually what organizational leaders want, correct? Drive value, drive conversion, and do it faster. What I'm observing happening though &mdash; and what I suspect my peers are seeing also &mdash; is that we're producing a lot more <em>code</em> but not actually releasing those features <em>faster</em>.</p>
+
+    <p>If you're new here, <a href="hello-world.html">this blog</a> is just a lot of my musings around engineering management and tech in general. I'm currently rereading some classic engineering management books and seeing how they hold up in the AI era. My team recently hypothesized to me that when it comes to building software, there are no new problems. Even before AI, if someone could have waved a magic wand and made code production 10x itself, I have a feeling we'd be seeing some of the same problems. So in theory, if there are no <em>new</em> problems&hellip; I want to look at some <em>old</em> ones. First up: <em>The Mythical Man-Month</em> by Fred Brooks, anniversary edition.</p>
+
+    <h2>Optimists with a deadline</h2>
+
+    <p>Let's start with how we got here. Organizations have always wanted us to ship faster. That isn't new, and it isn't unreasonable &mdash; faster means value in customers' hands sooner, and a better shot at beating the competition to it.</p>
+
+    <p>Engineers have always wanted the same thing, and I have always appreciated the can-do attitude when it comes to getting the thing done. Brooks writes that <em>&ldquo;All programmers are optimists,&rdquo;</em> and I think that's the kindest possible read on a low estimate. We're not sandbagging or guessing wildly. We're picturing the version of the project where the API behaves, the design holds still, and the tests pass the first time &mdash; and we believe in it. We want to be helpful. We want our work in production, in front of real people, as soon as possible. So we say yes to the hopeful timeline, and then someone asks, &ldquo;Can you do it in half the time?&rdquo; And a lot of us, wanting to help, try to find a way.</p>
+
+    <p>The estimates come out off every time. Not because anyone is bad at their job, but because we estimate the <em>perfect</em> version of the work, and the real version&hellip; has a <em>lot</em> of other people in it.</p>
+
+    <h2>No signatures, no problem</h2>
+
+    <p>Quick poll: how many layers of validation does your code go through before it hits production? A code review on the PR. QA. VQA. Design review, product review, maybe a feature release review on top of that. Or maybe you're one of the lucky ones, and you push straight to main. (Or the <em>really</em> lucky ones, where your robots push straight to main.)</p>
+
+    <p>Brooks leans on a familiar picture here: two people in a garage, building software faster than any big, established company. Nobody's surprised by that. Nobody in a garage has to explain themselves to anyone. There's no review board, no release schedule, no one else's roadmap to line up with. If it works, it ships.</p>
+
+    <p>What I like is that Brooks doesn't stop at &ldquo;they're scrappy.&rdquo; He explains what actually changes as software grows up. What those two people are building is a <em>program</em>: it does one job, and its authors know exactly how it behaves. The moment it has to work with other programs and interfaces, it becomes a <em>system</em>, which Brooks puts at roughly three times the effort. The moment other people depend on it &mdash; with testing, documentation, and a promise to maintain it &mdash; it becomes a <em>product</em>, and that's roughly three times again. A real company has to be both, so the effort doesn't add up. It multiplies.</p>
+
+    <p>Now look back at that list of layers: the reviews, the testing, the sign-offs. That's where the multiples live, and almost none of it is typing code. It's people coordinating with other people. So faster code would send the garage into orbit. But the company would speed up the one part that was never its actual bottleneck.</p>
+
+    <h2>The handoff is where it breaks</h2>
+
+    <p>So where does the time actually go? Brooks describes an inevitable moment that every project faces:</p>
+
+    <blockquote>&ldquo;In most computer projects there comes a day when it is discovered that the machine and the manual don't agree.&rdquo;</blockquote>
+
+    <p>Same story in 2026. The software doesn't match the spec &mdash; or the spec doesn't match what the product owner pictured. Even if you're being Agile about it, there is always something about the end result that isn't quite what was asked for (and we're fairly waterfall these days, if you look at how agents work, but that could be an entire subject on its own). Brooks calls the independent testing that catches it a project manager's best friend <em>and</em> daily adversary, and I really, truly understand that sentiment.</p>
+
+    <p>We try so hard to prevent it! The spec. The Jira ticket. The Figma mock. The acceptance criteria. Somehow, someone still assumes something different about how a feature should work, and we find out in validation testing, after the work is done.</p>
+
+    <p>Here's what AI did to that problem: it made it bigger. An engineer can spin up ten agents and get ten features built, which sounds amazing until you realize a human missed a requirement. Now we're holding ten finished things that don't match what the business needed, and a person has to sort through all ten. That bottleneck was always there, but it previously felt more aligned with a natural development timeline. Now the gap is obvious.</p>
+
+    <h2>Hurry up and wait</h2>
+
+    <p>There's a phrase my team says a lot: &ldquo;hurry up and wait.&rdquo; The project is behind, so we rush to add people, and then everything stalls. Someone is waiting on a design. Someone is waiting on an API. Maybe the feature is even completely ready to go and is just waiting for a feature flag to be flipped to turn it on&hellip; and someone just forgets to do it, with everything else going on.</p>
+
+    <p>Brooks calls the thinking behind the rush a myth, and it's the one in the book's title. His whole argument hangs on a single condition:</p>
+
+    <blockquote>&ldquo;Men and months are interchangeable commodities only when a task can be partitioned among many workers with no communication among them.&rdquo;</blockquote>
+
+    <p>Translation: more people only help if they can work without talking to each other. When has that ever been true in software? (Hurry up and wait, remember?)</p>
+
+    <p>For smaller projects, Brooks's answer was the &ldquo;surgical team&rdquo; &mdash; about ten people with specialized roles and one lead doing the cutting. It works because everyone has a defined job and the team stays small enough to communicate. But even Brooks says it doesn't scale. If a project takes 5,000 man-years, you can't get there by multiplying the surgical team by 50.</p>
+
+    <p>Now swap the people for agents. You could argue that today most of those surgical-team roles could be agents, with one or two humans orchestrating the rest, which I find a fascinating idea. But the same math applies the moment we try to scale it, because every agent is still attached to a person, and those people still have to coordinate. On my remote team, that looks like a relay race: the engineer builds on what their agent made from the designs the designer's agent made, which build on the spec the product manager's agent wrote. Every handoff is a message, a doc, or a call &mdash; and every one of them is a chance to add scope or time.</p>
+
+    <h2>Where the joy went</h2>
+
+    <p>Here's the part that gets me. When Brooks describes the joys of the craft, it comes down to two things: making something, and then watching people use it. There's real delight in fitting the puzzle pieces together, in continuous learning, and in creating something from nothing. But the bigger joy is the second half &mdash; the moment someone uses what you built.</p>
+
+    <p>Engineers are drained right now, and I think it's because both halves are under pressure. The artisan part of the job &mdash; the creative freedom to think through a hard problem and the satisfaction of seeing your solution reach production &mdash; has been quietly removed. What's left for a lot of people is reviewing line after line of generated code, and it's not even always making it to production. The reward at the end keeps getting pushed further out.</p>
+
+    <p>Brooks asks whether the architect gets all the fun while the implementer just takes orders. These days we tell engineers they get to be the architects, since the agent can do the implementing, but to say the quiet part out loud, there is just not as much fun involved when most of your day goes to reviewing generated code.</p>
+
+    <h2>The code was never the slow part</h2>
+
+    <p>So, back to the riddle: are we shipping faster? My answer, for now: we're <em>producing</em> faster. Shipping still depends on the same things it always has &mdash; the layers of review and testing, how well context survives a handoff, how many people have to coordinate, and whether leaders are aligned. Which is a little awkward, since leaders are the ones asking for the speed.</p>
+
+    <p>Brooks wrote his book in 1975. Estimates were optimistic then. Adding people to projects stalled projects then. And the code was never the slow part then, either. The tools have changed a lot. The problems haven't. AI didn't create them &mdash; it just turned the lights on.</p>
+
+    <div class="your-turn">
+      <p class="mono">Your turn</p>
+      <p class="your-turn-q">Now that writing code is cheap, where does work pile up in <em>your</em> org?</p>
+      <a class="btn" href="/#contact" data-ask data-goatcounter-click="blog-your-turn">Send me your answer</a>
+    </div>
+  </article>
+
+  <aside class="post-footer">
+    <div class="wrap narrow">
+      <ul class="tags"><li><span class="tag rose">Reading</span></li><li><span class="tag lav">Management</span></li><li><span class="tag lav">AI</span></li></ul>
+      <div class="author-card">
+        <img src="../images/sm_profile.jpg" alt="">
+        <div>
+          <strong>Sundi Myint</strong>
+          <p>Engineering manager, Elixir community speaker and podcaster. <a href="/#about">More about me</a>.</p>
+        </div>
+      </div>
+      <nav class="next-prev" aria-label="More posts">
+        <a class="next" href="./"><span class="label mono">Back to</span>Hallway Track →</a>
+      </nav>
+    </div>
+  </aside>
+
+  <footer class="mono">
+    <div class="wrap">© 2026 Sundi Myint</div>
+  </footer>
+  <script src="blog.js"></script>
+  <!-- GoatCounter visitor stats (cookieless): https://sundikhin.goatcounter.com -->
+  <script data-goatcounter="https://sundikhin.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

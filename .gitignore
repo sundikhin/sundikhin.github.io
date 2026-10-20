@@ -7,3 +7,6 @@ images/sm_profile.png
 # Original photos from the camera roll; the site uses the resized about-*.jpg copies
 images/*.heic
 images/*_1_105_c.jpeg
+
+# Original blog photos; the site uses the resized .jpg copies
+images/blog/*.png

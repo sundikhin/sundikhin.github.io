@@ -473,6 +473,9 @@ footer { padding: 2rem 0; text-align: center; font-size: 0.8rem; letter-spacing:
   .post-header.with-photo .wrap > * { max-width: calc(52vw - max(0px, (100vw - 44rem) / 2) - 3.5rem); }
 }
 @media (min-width: 1100px) {
+  /* The header keeps the show-notes layout on every post, so the title and photo sit in
+     the same place whether or not the post below has notes */
+  .post-header .narrow { max-width: 64rem; padding-right: calc(1.5rem + 19rem); }
   .post-header.with-photo .wrap > * { max-width: calc(52vw - max(0px, (100vw - 64rem) / 2) - 3.5rem); }
 }
 
