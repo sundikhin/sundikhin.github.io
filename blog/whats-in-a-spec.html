@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="post-title" content="What's in a Spec, Anyways?">
+  <title>What's in a Spec, Anyways? | Hallway Track</title>
+  <link rel="canonical" href="https://sundimyint.com/blog/whats-in-a-spec.html">
+  <meta name="description" content="A three-page spec, and still no idea what to build. Back to The Mythical Man-Month for everything that happens before the code gets written.">
+
+  <!-- Link previews: reuses the main site's share card for now -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Sundi Myint">
+  <meta property="og:url" content="https://sundimyint.com/blog/whats-in-a-spec.html">
+  <meta property="og:title" content="What's in a Spec, Anyways? | Hallway Track">
+  <meta property="og:description" content="A three-page spec, and still no idea what to build. Back to The Mythical Man-Month for everything that happens before the code gets written.">
+  <meta property="og:image" content="https://sundimyint.com/images/share.jpg?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sundi Myint, Engineering Manager">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <nav class="site-nav" aria-label="Site">
+    <div class="wrap">
+      <a class="nav-home" href="/">Sundi Myint</a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#expertise">Expertise</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#speaking">Speaking</a>
+        <a href="/#education">Education</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+      </div>
+      <a class="nav-contact" href="/#contact" data-goatcounter-click="blog-nav-contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="post-header with-photo" style="--cover: url('../images/blog/mythical-man-month.jpg'); --cover-pos: 50% 55%; --cover-pos-mobile: 42% 50%">
+    <div class="wrap narrow">
+      <a class="back mono" href="./">← Hallway Track</a>
+      <h1 class="rise rise-1">What's in a Spec, Anyways? Clarity vs Calamity</h1>
+      <div class="byline">
+        <img src="../images/sm_profile.jpg" alt="">
+        <div>
+          <span class="byline-name">Sundi Myint</span>
+          <span class="meta mono">Oct 25, 2026 · 6 min read</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article class="wrap narrow prose">
+    <p class="opener">Quick question. When's the last time someone handed you a spec, a ticket, or a doc that was three pages long, and you read through it without knowing what to build?</p>
+
+    <p>You read every word. The headings made sense. There was even a section called &ldquo;Acceptance Criteria.&rdquo; And yet, somehow, nothing in it was a thing you could take action on.</p>
+
+    <p>I used to think that was a writing problem. These days, I think it's a <em>volume</em> problem.</p>
+
+    <aside class="sidenote" aria-label="Show notes">
+      <a class="note-card" href="mythical-man-month.html" data-goatcounter-click="blog-note-mythical-man-month">
+        <img src="../images/blog/mythical-man-month.jpg" alt="" style="object-position: 50% 55%" loading="lazy">
+        <span class="note-body">
+          <span class="note-kicker mono"><b>1</b>Hallway Track</span>
+          <span class="note-title">Are We Actually Shipping Faster with AI?</span>
+          <span class="note-desc">The first <em>Mythical Man-Month</em> post in this series.</span>
+          <span class="note-cta">Read the post →</span>
+        </span>
+      </a>
+    </aside>
+
+    <p>If you're new here, I'm working through some classic engineering management books and asking whether they hold up in the AI era. Right now that's Fred Brooks's <a class="ref" href="mythical-man-month.html" data-goatcounter-click="blog-note-mythical-man-month"><em>The Mythical Man-Month</em><sup>1</sup></a>, and I'm splitting this particular stretch into two posts. Today we're talking about everything that happens <em>before</em> the code gets written. Next time, we'll dig into what happens after.</p>
+
+    <h2>One-sixth of the product estimation problem</h2>
+
+    <p>Brooks has a warning I felt personally:</p>
+
+    <blockquote>&ldquo;One must say that one does not estimate the entire task by estimating the coding portion only and then applying the ratios. The coding is only one-sixth or so of the problem, and errors in its estimate or in the ratios could lead to ridiculous results.&rdquo;</blockquote>
+
+    <p>Planning, coding, component testing, QA, and more. Coding is the <em>small</em> part. Brooks wrote this down <em>decades</em> before any of us had an AI assistant, and he already knew that if you only measure the coding side of things, you'll be wrong.</p>
+
+    <p>Once upon a time, I felt moderately confident in my team's ability to estimate work. Generally, writing tests was built into their estimates, and I thought that was good enough. But looking back, we just about never factored in time to QA things, or for release validations. And then once AI hit the scene, we scaled up the code production part of the process, but struggled with scaling up the other parts. If coding is one-sixth of the problem, and AI just made that sixth dramatically faster, then the other five-sixths didn't get the memo. We just stopped looking at it with the correct lens.</p>
+
+    <h2>A magic recipe for no bugs</h2>
+
+    <p>So how do you get software that's actually good? Brooks's answer is top-down design: start with the broad strokes, then narrow down and down into the details, refining only when you have to.</p>
+
+    <p>A good top-down design avoids bugs because the structure is clear enough to make the acceptance criteria clear. If you don't know what you're building, assumptions get made. Then those assumptions show up later and look exactly like bugs.</p>
+
+    <p>Brooks also says it won't be perfect on the first try; a <em>pilot program</em> will often get created and then thrown away once lessons have been learned. What he describes reminds me a lot of a 1970s version of what I call an MVP. When you start broad and work down, you notice when you've taken a wrong turn, and you can fix it quickly.</p>
+
+    <p>I have heard this story more times than I can count. We start broad. We draw the boxes. And then someone says, &ldquo;Great, can we get going?&rdquo; Suddenly we go from ideation to strategizing, and it gets real very quickly.</p>
+
+    <p>Now imagine that pressure with an agent in the loop. The agent can generate all the detail instantly, so the broad-strokes stage starts to feel optional. (It isn't. It might be more valuable than ever, because it's the one thing the agent can't do for you: decide what the thing is <em>for</em>.) There is definitely something to be said for building-the-plane-while-flying-it type development, and that obviously has its place in the world. But not all software can &mdash; or should &mdash; operate that way.</p>
+
+    <h2>Sharp, not fuzzy</h2>
+
+    <p>I wish I could shout the following from a rooftop during every project kickoff: <strong>projects rarely fall off a cliff.</strong> They slip a little at a time, for small reasons. Picking a deadline and working backwards from there usually doesn't end up in a world in which you get the product you set out to build. You're more likely to succeed if you pick <em>milestones</em>.</p>
+
+    <p>And milestones <em>have</em> to be unambiguous. Brooks calls them &ldquo;sharp.&rdquo; Something like &ldquo;the new page loads in under two seconds for 95 percent of visits,&rdquo; or &ldquo;all three payment providers complete a test purchase in staging.&rdquo; An ambiguous milestone tells you nothing, and it's a heavier burden than it looks. Fuzzy versions of the aforementioned milestones might look like &ldquo;the new page is fast,&rdquo; or &ldquo;checkout works as expected,&rdquo; or my personal favorite, &ldquo;checkout works exactly like it used to in the old version.&rdquo;</p>
+
+    <p>I'd go further. In my experience, a fuzzy milestone can be <em>worse</em> than none at all, because it gives everyone the feeling of alignment and false progress. Imagine a long document that sits in front of the team, and at a glance, all of the right words are there. The engineer builds it. Then a stakeholder says, &ldquo;That's not what I asked for.&rdquo; And the engineer will reply, &ldquo;this is what the spec doc said, vaguely, and I made assumptions on the gaps.&rdquo; Now they're both looking at that original document and realize it never said much of anything, at all.</p>
+
+    <h2>The document that looks like work</h2>
+
+    <p>This is where AI enters the chat, and it's not the villain in our story. It's more like an amplifier for every moving piece of the project.</p>
+
+    <p>People are generating all sorts of material now. Documentation. Acceptance criteria. Project specs. And it <em>reads</em> beautifully. The sentences are clean. The headings are in the right places. You think, wow, this is comprehensive.</p>
+
+    <p>Then you look for the thought in it. Is there an actual decision? A real constraint? Something that two people could look at and agree, yes, that passed, or no, that didn't?</p>
+
+    <p>Often, no. There are no real thoughts in here at all, are there?</p>
+
+    <p>That's the old problem, now with better formatting. Fuzziness used to look fuzzy. You could <em>see</em> a vague requirement. Now it can look sharp, because fluent writing is cheap.</p>
+
+    <p>So I've started using a simple test. When I read an acceptance criterion, I ask: <em>could two reasonable people disagree about whether this passed?</em> If yes, it's not a criterion yet. It's a mood.</p>
+
+    <h2>Write down what you meant</h2>
+
+    <p>Today, AI is usually the thing generating code documentation, and that's mostly fine. It can tell you what the code <em>does</em>. What it can't tell you is what we <em>wanted</em> it to do. And truthfully, that's the part that we want to preserve. We want to remember what decisions we made and why, so that future-us knows how to handle things.</p>
+
+    <p>Good documentation starts with <em>intention</em>: the act of writing down what you want the thing to be, in terms specific enough to check. Who it's for, what it takes in and puts out, how you'll know it works, what happens when it breaks. Brooks laid out a checklist for this, and it's a little dated (it's full of machine details), but the questions underneath it still work. I've been translating them into something more modern, and I'm workshopping a little on how to make that modern list something more useful in my day-to-day.</p>
+
+    <h2>The five-sixths</h2>
+
+    <p>So, back to that spec you couldn't build from. The real question was never whether it was long. It's whether anyone could look at the finished work and say, with a straight face, &ldquo;yes, that's what we asked for.&rdquo;</p>
+
+    <p>AI made the coding sixth fast. It did <em>not</em> make the rest of the work go away. Planning, defining, checking, and writing down what you meant are still the whole job, and they're getting harder to see because the volume is so high. Brooks wrote this in 1975, and the diagnosis still works: most of the trouble isn't in the code. It's in what we told the code to do.</p>
+
+    <p>Next time: what happens after you ship, and why the org chart might be the hardest thing in your company to refactor.</p>
+
+    <section class="show-notes" aria-labelledby="show-notes-title">
+      <h2 id="show-notes-title">Show notes</h2>
+      <ol>
+        <li>
+          <a class="note-card" href="mythical-man-month.html" data-goatcounter-click="blog-note-mythical-man-month">
+          <img src="../images/blog/mythical-man-month.jpg" alt="" style="object-position: 50% 55%" loading="lazy">
+          <span class="note-body">
+            <span class="note-kicker mono"><b>1</b>Hallway Track</span>
+            <span class="note-title">Are We Actually Shipping Faster with AI?</span>
+            <span class="note-desc">The first <em>Mythical Man-Month</em> post in this series.</span>
+            <span class="note-cta">Read the post →</span>
+          </span>
+        </a>
+        </li>
+      </ol>
+    </section>
+
+    <div class="your-turn">
+      <p class="mono">Your turn</p>
+      <p class="your-turn-q">Think about the last requirement that bit you. Was it missing, or was it there, and just not sharp enough to catch?</p>
+      <a class="btn" href="/#contact" data-ask data-goatcounter-click="blog-your-turn">Send me your answer</a>
+    </div>
+  </article>
+
+  <aside class="post-footer">
+    <div class="wrap narrow">
+      <ul class="tags"><li><span class="tag rose">Reading</span></li><li><span class="tag lav">Management</span></li><li><span class="tag lav">AI</span></li></ul>
+      <div class="author-card">
+        <img src="../images/sm_profile.jpg" alt="">
+        <div>
+          <strong>Sundi Myint</strong>
+          <p>Engineering manager, Elixir community speaker and podcaster. <a href="/#about">More about me</a>.</p>
+        </div>
+      </div>
+      <nav class="next-prev" aria-label="More posts">
+        <a class="next" href="./"><span class="label mono">Back to</span>Hallway Track →</a>
+      </nav>
+    </div>
+  </aside>
+
+  <footer class="mono">
+    <div class="wrap">© 2026 Sundi Myint</div>
+  </footer>
+  <script src="blog.js"></script>
+  <!-- GoatCounter visitor stats (cookieless): https://sundikhin.goatcounter.com -->
+  <script data-goatcounter="https://sundikhin.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
