@@ -281,6 +281,30 @@ a { color: inherit; }
   line-height: 1.45;
   font-weight: 500;
 }
+
+/* Inline SVG diagrams: colours come from the theme tokens, so they follow dark mode */
+.prose .diagram {
+  margin: 2rem 0 2.25rem;
+  padding: 1.25rem 1rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.diagram svg { display: block; width: 100%; height: auto; font-family: "Outfit", system-ui, sans-serif; }
+/* On phones the diagram keeps a readable size and scrolls sideways instead of shrinking */
+@media (max-width: 600px) {
+  .diagram .diagram-scroll { overflow-x: auto; }
+  .diagram svg { min-width: 440px; }
+}
+.diagram .d-label { font-family: "Space Mono", ui-monospace, monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; fill: var(--muted); }
+.diagram .d-box { fill: var(--lavender-soft); stroke: var(--lavender); stroke-width: 1.5; }
+.diagram .d-lead { fill: var(--surface-alt); }
+.diagram .d-svc { fill: var(--rose-soft); stroke: var(--rose); }
+.diagram .d-text { font-size: 15px; font-weight: 600; fill: var(--text); dominant-baseline: middle; }
+.diagram .d-line { stroke: var(--lavender); stroke-width: 2; }
+.diagram .d-arrow { stroke: var(--rose); stroke-width: 3; fill: none; }
+.diagram .d-arrowhead { fill: var(--rose); }
+.prose .diagram figcaption { margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.45; color: var(--muted); text-align: center; }
 .prose code {
   font-family: "Space Mono", ui-monospace, monospace;
   font-size: 0.88em;

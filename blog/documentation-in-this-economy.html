@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="post-title" content="Documentation? In This Economy?">
+  <title>Documentation? In This Economy? | Hallway Track</title>
+  <link rel="canonical" href="https://sundimyint.com/blog/documentation-in-this-economy.html">
+  <meta name="description" content="Docs go stale the minute they ship, and AI can write them now anyway. So why bother? Back to The Mythical Man-Month for what happens after the code.">
+
+  <!-- Link previews: reuses the main site's share card for now -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Sundi Myint">
+  <meta property="og:url" content="https://sundimyint.com/blog/documentation-in-this-economy.html">
+  <meta property="og:title" content="Documentation? In This Economy? | Hallway Track">
+  <meta property="og:description" content="Docs go stale the minute they ship, and AI can write them now anyway. So why bother? Back to The Mythical Man-Month for what happens after the code.">
+  <meta property="og:image" content="https://sundimyint.com/images/share.jpg?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sundi Myint, Engineering Manager">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <nav class="site-nav" aria-label="Site">
+    <div class="wrap">
+      <a class="nav-home" href="/">Sundi Myint</a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#expertise">Expertise</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#speaking">Speaking</a>
+        <a href="/#education">Education</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+      </div>
+      <a class="nav-contact" href="/#contact" data-goatcounter-click="blog-nav-contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="post-header with-photo" style="--cover: url('../images/blog/mythical-man-month.jpg'); --cover-pos: 50% 55%; --cover-pos-mobile: 42% 50%">
+    <div class="wrap narrow">
+      <a class="back mono" href="./">← Hallway Track</a>
+      <h1 class="rise rise-1">Documentation? In This Economy?</h1>
+      <div class="byline">
+        <img src="../images/sm_profile.jpg" alt="">
+        <div>
+          <span class="byline-name">Sundi Myint</span>
+          <span class="meta mono">Nov 2, 2026 · 6 min read</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article class="wrap narrow prose">
+    <p class="opener">Quick question: are you still documenting your code these days?</p>
+
+    <p>Okay, let's talk about the sexiest part of software development.</p>
+
+    <p>Documentation!</p>
+
+    <p>I know, I know. On a sliding scale of &ldquo;do we have to?&rdquo; to &ldquo;isn't this dead now?&rdquo; documentation is just about the last thing most folks want to chat about. There has always been a legitimate concern about wasting software engineering cycles on documenting code decisions, and one of the main arguments I've heard against it is that it goes out of date the second it hits production. There seem to be two truths in life. Car values plummet the second you drive a vehicle off a lot, and documentation goes stale the minute after a code deployment. If it goes stale this quickly, why bother? Then the newer argument, &ldquo;well, AI can just document this for me now,&rdquo; is a fair one. If it can help document <em>why</em> this thing was done, I would agree with that argument. Not just &ldquo;this code changes the price shown on the page&rdquo; but &ldquo;this code changes the price due to weird tax laws that got introduced and then repealed again all within 2026&rdquo; &mdash; the why of the change matters more often than you would think.</p>
+
+    <p>As I was going through this middle section of <em>The Mythical Man-Month</em>, I chuckled a little too much at an anecdote Brooks shared &mdash; in his classroom, he had assumed that his students didn't know <em>how</em> to write good documentation, which is why they were not doing it. Not that they didn't want to, or didn't see the point in it. Here we are, nearly fifty years later (oh boy, that number might keep me up at night) and I think we're answering that same question.</p>
+
+    <h2>The what goes stale. The why doesn't.</h2>
+
+    <p>Let's take the stale argument seriously, because it's a good one. If I write down that a function formats the price on the page, and someone changes that function on Tuesday, my note is wrong by Wednesday. Fair. That's the part of documentation that expires.</p>
+
+    <p>But look at the price example again. The <em>what</em> is &ldquo;this code changes the price shown on the page.&rdquo; Anyone can read the code and see that. The <em>why</em> is a tax law that appeared and vanished within a single year. That reason doesn't go stale when the code changes. It's what tells the next engineer whether the code is safe to delete.</p>
+
+    <p>So the real question isn't &ldquo;will it go out of date?&rdquo; It's &ldquo;which part of this will still matter in six months?&rdquo; The what ages in days. The why lasts as long as the reason does.</p>
+
+    <h2>AI can write the what. Someone still has to supply the why.</h2>
+
+    <p>I'm not here to argue with the AI crowd. Point a model at a codebase and it will describe what's there faster and more patiently than any of us. It can give us every reference to what we're searching for, pick up context clues, and give us an entire run through of the logic tree that is typically found in documentation.</p>
+
+    <p>What it can't do is know <em>why</em>. The reason a change got made lives in someone's head, a chat thread, or a meeting nobody recorded. If no one says it out loud, humans try to fill in the gaps with their memories. And human memories are fickle, fickle things. And a tidy paragraph explaining the wrong thing is worse than no paragraph at all.</p>
+
+    <p>This is the intention problem. Brooks laid out a map for good documentation, and even the dated parts of it start in the same place: say what the thing is for, in terms specific enough to check. Think back to those students in Brooks' classroom. The missing skill wasn't that they didn't know how to take notes on their code, or how to formulate those notes into cohesive documents. It was knowing which questions to answer.</p>
+
+    <p>Today, those questions are most of the job. Let the AI draft the prose. You supply the reasons, and then you check the draft against what you actually meant.</p>
+
+    <h2>The first version sticks, and so do its compromises</h2>
+
+    <p>So which reasons are worth the effort? Not all of them. Nobody needs a paragraph explaining why a button is blue. The ones that matter are the reasons behind the shortcuts: why that value is hard-coded, why we skipped that edge case, why we built it this way &ldquo;for now.&rdquo; Those are the first to be forgotten and the most expensive to rediscover, because by the time someone trips over the shortcut, the person who chose it has moved on to something else. And shortcuts don't spread evenly across a project. They pile up in one place in particular, the one place we always insist is temporary.</p>
+
+    <p>Most of what ships is a first version. You know the line: the MVP always goes to production. Brooks says to plan on throwing the first version away. But every engineer I've worked with will tell you that the MVP always goes to production; it's just the truth. And if the first version is going to stick around, so is everything about it that's rough: what it skips, what it fakes, what you promised yourself you'd fix. Those compromises are exactly what needs writing down. Not as an apology. As a map. &ldquo;The first pass doesn't handle X. Y is hard-coded. The fast-follows are A and B.&rdquo;</p>
+
+    <p>That same note does a second job. It's what you hand leadership before they find the gaps themselves. Brooks is blunt that the longer the boss stays out of the loop, the worse it gets, and that regular, concrete milestone updates keep them engaged without pulling them into the work. A written list of what's raw and what's coming is that update, made permanent.</p>
+
+    <p>Plan for change. Then write the plan down.</p>
+
+    <h2>Architecture follows the org chart</h2>
+
+    <p>Documentation has another way of going stale: nobody owns it.</p>
+
+    <blockquote>&ldquo;Organizations which design systems are constrained to produce systems which are copies of the communication structures of these organizations.&rdquo;</blockquote>
+
+    <p>Conway's Law, folks. <strong><em>Conway's Law.</em></strong> I cannot count the number of times I've heard someone just comment &ldquo;Conway's Law&rdquo; in a meeting chat or Slack thread as if it was a whole sentence. I never had the whole context until just now. I'd seen or heard the quote before but this diagram really put it into perspective for me:</p>
+
+    <figure class="diagram">
+      <div class="diagram-scroll">
+      <svg viewBox="0 0 640 230" role="img" aria-labelledby="conway-title conway-desc">
+        <title id="conway-title">Conway's Law</title>
+        <desc id="conway-desc">On the left, an org chart: one lead over three teams, A, B and C. On the right, the system those teams build: three services, A, B and C, wired together exactly the way the teams talk to each other.</desc>
+        <text class="d-label" x="150" y="24" text-anchor="middle">The org chart</text>
+        <text class="d-label" x="490" y="24" text-anchor="middle">The system</text>
+
+        <line class="d-line" x1="150" y1="88" x2="60" y2="170"/>
+        <line class="d-line" x1="150" y1="88" x2="150" y2="170"/>
+        <line class="d-line" x1="150" y1="88" x2="240" y2="170"/>
+        <rect class="d-box d-lead" x="100" y="48" width="100" height="40" rx="8"/>
+        <text class="d-text" x="150" y="68" text-anchor="middle">Lead</text>
+        <rect class="d-box" x="20" y="170" width="80" height="40" rx="8"/>
+        <text class="d-text" x="60" y="190" text-anchor="middle">Team A</text>
+        <rect class="d-box" x="110" y="170" width="80" height="40" rx="8"/>
+        <text class="d-text" x="150" y="190" text-anchor="middle">Team B</text>
+        <rect class="d-box" x="200" y="170" width="80" height="40" rx="8"/>
+        <text class="d-text" x="240" y="190" text-anchor="middle">Team C</text>
+
+        <path class="d-arrow" d="M300 150 H340" marker-end="url(#conway-arrow)"/>
+        <defs>
+          <marker id="conway-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path class="d-arrowhead" d="M0 0 L10 5 L0 10 z"/>
+          </marker>
+        </defs>
+
+        <line class="d-line" x1="490" y1="88" x2="400" y2="170"/>
+        <line class="d-line" x1="490" y1="88" x2="490" y2="170"/>
+        <line class="d-line" x1="490" y1="88" x2="580" y2="170"/>
+        <rect class="d-box d-lead" x="430" y="48" width="120" height="40" rx="8"/>
+        <text class="d-text" x="490" y="68" text-anchor="middle">Gateway</text>
+        <rect class="d-box d-svc" x="360" y="170" width="80" height="40" rx="8"/>
+        <text class="d-text" x="400" y="190" text-anchor="middle">Service A</text>
+        <rect class="d-box d-svc" x="450" y="170" width="80" height="40" rx="8"/>
+        <text class="d-text" x="490" y="190" text-anchor="middle">Service B</text>
+        <rect class="d-box d-svc" x="540" y="170" width="80" height="40" rx="8"/>
+        <text class="d-text" x="580" y="190" text-anchor="middle">Service C</text>
+      </svg>
+      </div>
+      <figcaption>Same boxes, same lines. The seams in the system land where the seams in the team are.</figcaption>
+    </figure>
+
+    <p>The first org chart will mirror the first design of the system, which Brooks says is &ldquo;almost surely not the right one.&rdquo; In plain terms, we form our teams around our first guess at the architecture. Then we learn more, and the architecture changes. The teams usually stay exactly where they are.</p>
+
+    <p>Apply that to documentation. When a system lives with one big team, the knowledge sits in a lot of overlapping heads, and it mostly works. Break the system into pieces, monolith to microservices say, and every piece needs a defined team behind it, or the knowledge has nowhere to live. We say the right words about domain ownership and team responsibilities. But without clear leadership, those lines go fluid, and fluid lines mean it's nobody's job to write down the why, or to update it when it changes.</p>
+
+    <p>AI can break the code into pieces in an afternoon. It can't decide who answers for each piece. That's why these changes move at a snail's pace in a large organization, and why the docs are usually the first thing to drift.</p>
+
+    <h2>So, how valuable is documentation in 2026?</h2>
+
+    <p>So, back to the sliding scale. Do we have to write documentation? Yes, though probably less of it than you'd think. Is documentation dead, now that humans aren't reading and writing tech specs? Not quite. What's fading is the part nobody should have been writing by hand in the first place: the <em>what</em>, the plain description of what the code does. What remains is the part only a person can supply: why we made the choice, what we skipped, who owns it, and what we told leadership to expect. All of it outlives the sprint, which is the whole reason to write it down.</p>
+
+    <p>So, documentation? In this economy? Yes, especially in this one. Code has never been cheaper to produce, which means the reasons behind it have never been easier to lose. Let the AI write the what, and keep a human on the why. The code may change tomorrow, but the reason that you wrote it today won't.</p>
+
+    <div class="your-turn">
+      <p class="mono">Your turn</p>
+      <p class="your-turn-q">What's the last decision in your codebase that nobody wrote the reason down for?</p>
+      <a class="btn" href="/#contact" data-ask data-goatcounter-click="blog-your-turn">Send me your answer</a>
+    </div>
+  </article>
+
+  <aside class="post-footer">
+    <div class="wrap narrow">
+      <ul class="tags"><li><span class="tag rose">Reading</span></li><li><span class="tag lav">Management</span></li><li><span class="tag lav">AI</span></li></ul>
+      <div class="author-card">
+        <img src="../images/sm_profile.jpg" alt="">
+        <div>
+          <strong>Sundi Myint</strong>
+          <p>Engineering manager, Elixir community speaker and podcaster. <a href="/#about">More about me</a>.</p>
+        </div>
+      </div>
+      <nav class="next-prev" aria-label="More posts">
+        <a class="next" href="./"><span class="label mono">Back to</span>Hallway Track →</a>
+      </nav>
+    </div>
+  </aside>
+
+  <footer class="mono">
+    <div class="wrap">© 2026 Sundi Myint</div>
+  </footer>
+  <script src="blog.js"></script>
+  <!-- GoatCounter visitor stats (cookieless): https://sundikhin.goatcounter.com -->
+  <script data-goatcounter="https://sundikhin.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
